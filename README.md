@@ -4,7 +4,7 @@ The Web Scraper is located at cmews.py. The script that uploads the file to goog
 Libraries required can be found in the environment folder
 
 ## Functionality
-Scrapes the web page at https://www.cmegroup.com/trading/metals/base/copper_quotes_volume_voi.html#tradeDate=20200518 and compiles all of the tables into a single pandas dataframe according to Strike price, separated by month.
+Scrapes the web page at https://www.cmegroup.com/trading/metals/base/copper_quotes_volume_voi.html#tradeDate=20200518 and compiles all of the tables into a single pandas dataframe according to Strike price, separated by month. Pushes to the google sheet located at https://docs.google.com/spreadsheets/d/1VBLulwDT9GWEQfdEi99isNPxFuDfRGQi75VcJvJE8CE/edit?usp=sharing
 
 ## Bugs
 1. In the final dataframe, a row indexed by 75 is not sorted, possibly due to the data being stored as a string. Will have to figure out how to cast that 1 specific index to a float.
