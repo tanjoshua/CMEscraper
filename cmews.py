@@ -173,5 +173,3 @@ def getdataframe():
     return df
     # print to excel for testing
     # df.to_excel("output.xlsx")
-
-print(getdataframe())
