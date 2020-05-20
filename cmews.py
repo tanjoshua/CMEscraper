@@ -166,8 +166,12 @@ def getdataframe():
     df[('Dec', 'Total')] = df[('Dec', 'Call OI')] + df[('Dec', 'Put OI')]
     df[('Feb', 'Total')] = df[('Feb', 'Call OI')] + df[('Feb', 'Put OI')]
 
+    # convert all indices to ints
+    df.index = df.index.map(int)
     # Sort by descending strike price
     df.sort_index(ascending = False, inplace = True)
     return df
     # print to excel for testing
     # df.to_excel("output.xlsx")
+
+print(getdataframe())
