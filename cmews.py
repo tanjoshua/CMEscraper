@@ -17,7 +17,8 @@ finally:
 
 
 dfs = pd.read_html(driver.page_source)
-print(len(dfs))
+
+# Split dfs into corresponding data frames
 juneCalls = dfs[1]
 junePuts = dfs[2]
 julCalls = dfs[3]
@@ -35,20 +36,24 @@ decPuts = dfs[14]
 febCalls = dfs[15]
 febPuts = dfs[16]
 
-result = pd.DataFrame(columns=['June 20', 'July 20', 'Aug 20', 'Sep 20', 'Oct20', 
-'Nov20', 'Dec20', 'Feb21'])
 
+# Create June's dataframe
+subcolumns = [['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Feb'], 
+['Strikes', 'Call OI', 'Put OI', 'Total']]
+tuples = list(zip(*subcolumns))
+print(tuples)
 juneResult = pd.DataFrame(columns=['Strikes', 'Call OI', 'Put OI', 'Total'])
 
 rowsList = []
+# June calls
 for index, row in juneCalls.iterrows():
     strikePrice = row['Strike']['Strike']['Strike']['Strike']['Strike']['Strike']
     oi = row['Open Interest']['At Close']['At Close']['Open Interest']['At Close']['At Close']
     dict1 = {'Strikes': strikePrice, 'Call OI': oi}
     rowsList.append(dict1)
 june = pd.DataFrame(rowsList)
-print(june)
-print(junePuts.head(5))
+
+# June puts
 for index, row in junePuts.iterrows():
     strikePrice = row['Strike']['Strike']['Strike']
     oi = row['Open Interest']['At Close']['At Close']
