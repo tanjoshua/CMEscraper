@@ -5,17 +5,18 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import pandas as pd
 
+# launch web browser
 driver = webdriver.Firefox()
 driver.get('https://www.cmegroup.com/trading/metals/base/copper_quotes_volume_voi.html#tradeDate=20200518')
 
-
+# Wait for elements to load
 try:
     element_present = EC.presence_of_element_located((By.ID, 'volumesStrikeDataTable'))
     WebDriverWait(driver, 10).until(element_present)
 finally:
     print("Page loaded")
 
-
+# use pandas to read all the tables from the web page
 dfs = pd.read_html(driver.page_source)
 
 # Split dfs into corresponding data frames
@@ -37,7 +38,7 @@ febCalls = dfs[15]
 febPuts = dfs[16]
 
 
-# Create dataframe for all months
+# Create dataframe for all months 
 months = ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Feb']
 subcolumns = ['Strikes', 'Call OI', 'Put OI', 'Total']
 tuples = [(a,b) for a in months for b in subcolumns]
@@ -140,8 +141,20 @@ for index, row in febPuts.iterrows():
     strikePrice = row['Strike']['Strike']['Strike']
     oi = row['Open Interest']['At Close']['At Close']
     df.loc[strikePrice, ('Feb', 'Put OI')] = oi   
-  
-# Calculate total for all
+
+# drop 'total' row
+df.drop(['Totals'], inplace = True)
+# Create strike column for each month
+df[('June', 'Strikes')] = df.index
+df[('July', 'Strikes')] = df.index
+df[('Aug', 'Strikes')] = df.index
+df[('Sep', 'Strikes')] = df.index
+df[('Oct', 'Strikes')] = df.index
+df[('Nov', 'Strikes')] = df.index
+df[('Dec', 'Strikes')] = df.index
+df[('Feb', 'Strikes')] = df.index
+
+# Calculate total for all months
 df.fillna(0, inplace = True)
 df[('June', 'Total')] = df[('June', 'Call OI')] + df[('June', 'Put OI')]
 df[('July', 'Total')] = df[('July', 'Call OI')] + df[('July', 'Put OI')]
@@ -151,4 +164,9 @@ df[('Oct', 'Total')] = df[('Oct', 'Call OI')] + df[('Oct', 'Put OI')]
 df[('Nov', 'Total')] = df[('Nov', 'Call OI')] + df[('Nov', 'Put OI')]
 df[('Dec', 'Total')] = df[('Dec', 'Call OI')] + df[('Dec', 'Put OI')]
 df[('Feb', 'Total')] = df[('Feb', 'Call OI')] + df[('Feb', 'Put OI')]
+
+# Sort by descending strike price
+df.sort_index(ascending = False, inplace = True)
 print(df)
+# print to excel for testing
+# df.to_excel("output.xlsx")
