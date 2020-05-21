@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import pandas as pd
 
-def getdataframe():
+def get_dataframe():
     # launch web browser
     driver = webdriver.Firefox()
     driver.get('https://www.cmegroup.com/trading/metals/base/copper_quotes_volume_voi.html#tradeDate=20200518')
@@ -21,22 +21,22 @@ def getdataframe():
     dfs = pd.read_html(driver.page_source)
 
     # Split dfs into corresponding data frames
-    juneCalls = dfs[1]
-    junePuts = dfs[2]
-    julCalls = dfs[3]
-    julPuts = dfs[4]
-    augCalls = dfs[5]
-    augPuts = dfs[6]
-    sepCalls = dfs[7]
-    sepPuts = dfs[8]
-    octCalls = dfs[9]
-    octPuts = dfs[10]
-    novCalls = dfs[11]
-    novPuts = dfs[12]
-    decCalls = dfs[13]
-    decPuts = dfs[14]
-    febCalls = dfs[15]
-    febPuts = dfs[16]
+    june_calls = dfs[1]
+    june_puts = dfs[2]
+    jul_calls = dfs[3]
+    jul_puts = dfs[4]
+    aug_calls = dfs[5]
+    aug_puts = dfs[6]
+    sep_calls = dfs[7]
+    sep_puts = dfs[8]
+    oct_calls = dfs[9]
+    oct_puts = dfs[10]
+    nov_calls = dfs[11]
+    nov_puts = dfs[12]
+    dec_calls = dfs[13]
+    dec__puts = dfs[14]
+    feb_calls = dfs[15]
+    feb_puts = dfs[16]
 
 
     # Create dataframe for all months 
@@ -47,98 +47,98 @@ def getdataframe():
     df = pd.DataFrame(columns=index)
 
     # June calls
-    for index, row in juneCalls.iterrows():
+    for index, row in june_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('June', 'Call OI')] = oi
 
 
     # June puts
-    for index, row in junePuts.iterrows():
+    for index, row in june_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('June', 'Put OI')] = oi
 
     # July calls
-    for index, row in julCalls.iterrows():
+    for index, row in jul_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('July', 'Call OI')] = oi
 
     # July puts
-    for index, row in julPuts.iterrows():
+    for index, row in jul_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('July', 'Put OI')] = oi    
 
     # Aug calls
-    for index, row in augCalls.iterrows():
+    for index, row in aug_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Aug', 'Call OI')] = oi
 
     # Aug puts
-    for index, row in augPuts.iterrows():
+    for index, row in aug_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Aug', 'Put OI')] = oi    
 
     # Sep calls
-    for index, row in sepCalls.iterrows():
+    for index, row in sep_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Sep', 'Call OI')] = oi
 
     # Sep puts
-    for index, row in sepPuts.iterrows():
+    for index, row in sep_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Sep', 'Put OI')] = oi    
 
     # Oct calls
-    for index, row in octCalls.iterrows():
+    for index, row in oct_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Oct', 'Call OI')] = oi
 
     # Oct puts
-    for index, row in octPuts.iterrows():
+    for index, row in oct_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Oct', 'Put OI')] = oi   
 
     # Nov calls
-    for index, row in novCalls.iterrows():
+    for index, row in nov_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Nov', 'Call OI')] = oi
 
     # Nov puts
-    for index, row in novPuts.iterrows():
+    for index, row in nov_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Nov', 'Put OI')] = oi  
 
     # Dec calls
-    for index, row in decCalls.iterrows():
+    for index, row in dec_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Dec', 'Call OI')] = oi
 
     # Dec puts
-    for index, row in decPuts.iterrows():
+    for index, row in dec__puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Dec', 'Put OI')] = oi 
 
     # Feb calls
-    for index, row in febCalls.iterrows():
+    for index, row in feb_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Feb', 'Call OI')] = oi
 
     # Feb puts
-    for index, row in febPuts.iterrows():
+    for index, row in feb_puts.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']
         oi = row['Open Interest']['At Close']['At Close']
         df.loc[strikePrice, ('Feb', 'Put OI')] = oi   

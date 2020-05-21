@@ -3,7 +3,7 @@ import cmews
 from gspread_dataframe import set_with_dataframe
 
 # get dataframe
-df = cmews.getdataframe()
+df = cmews.get_dataframe()
 
 # authenticate
 gc = gspread.service_account(filename='cme-scraping-76715bfd0d20.json')
@@ -14,3 +14,4 @@ ws = sh.worksheet('Copper')
 
 # transfer dataframe to excel
 set_with_dataframe(ws, df)
+print("Completed upload to Google Sheets")
