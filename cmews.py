@@ -46,6 +46,7 @@ def get_dataframe():
     index = pd.MultiIndex.from_tuples(tuples)
     df = pd.DataFrame(columns=index)
 
+    # Transfer data from each month into the dataframe
     # June calls
     for index, row in june_calls.iterrows():
         strikePrice = row['Strike']['Strike']['Strike']['Strike']['Strike']['Strike']
