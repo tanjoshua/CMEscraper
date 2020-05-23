@@ -6,7 +6,7 @@ from gspread_dataframe import set_with_dataframe
 df = cmews.get_dataframe()
 
 # authenticate
-gc = gspread.service_account(filename='cme-scraping-76715bfd0d20.json')
+gc = gspread.service_account(filename='<INSERT FILE NAME HERE>.json')
 
 #open file 
 sh = gc.open("CME scraper")
