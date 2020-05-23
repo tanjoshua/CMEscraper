@@ -6,6 +6,7 @@ Libraries required can be found in the environment folder. To launch the virtual
 ## Functionality
 Scrapes the web page at https://www.cmegroup.com/trading/metals/base/copper_quotes_volume_voi.html#tradeDate=20200518 and compiles all of the tables into a single pandas dataframe according to Strike price, separated by month. Pushes to a google sheet.
 
+## Instructions for use
 **For privacy reasons**, I have removed the .json authentication key. If you would like to use this script, create a Google service account and place the JSON key in the same directory as this program. Give your service account edit permissions to your google sheet, and change the names of the files in sheet_pusher.py. 
 
 ## Bugs
